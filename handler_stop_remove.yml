@@ -1,0 +1,16 @@
+---
+- name: remove
+  hosts: aws
+  become: true
+  tasks:
+  - name: remove using handlers
+    service:
+      name: httpd
+      state: stopped
+    notify: yum remove httpd
+  handlers:
+  - name: remove using handlers
+    yum:
+      name: httpd
+      state: absent
+

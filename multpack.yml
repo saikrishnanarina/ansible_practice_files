@@ -1,0 +1,9 @@
+---
+- name: useradd
+  hosts: all
+  become: true
+  tasks:
+  - name: useradd
+    user:
+      name: ["krishna11" , "naidu22" , "sain33" ]
+      state: present

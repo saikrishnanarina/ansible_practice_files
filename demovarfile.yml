@@ -1,0 +1,26 @@
+---
+- name: create some users and packages
+  hosts: all
+  become: true
+  vars_files:
+    - useradd.yml
+    - gitpackage.yml
+    - createfile.yml
+    - createdir.yml
+  tasks:
+    - name: create user using variable file
+      user:
+        name: "{{ user }}"
+    - name: install git package
+      yum:
+        name: "{{ package }}"
+        state: installed
+    - name:
+      file:
+        path: "{{ file }}"
+        state: touch
+    - name:
+      file:
+        path: "{{ dir }}"
+        state: directory
+

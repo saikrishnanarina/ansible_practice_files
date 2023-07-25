@@ -1,0 +1,10 @@
+---
+- name: create user using varfile
+  hosts: all
+  become: true
+  vars_files:
+    - varfiles.yml
+  tasks:
+    - name: create user using varfile
+      user:
+        name: "{{ sai }}"

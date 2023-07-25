@@ -1,0 +1,11 @@
+---
+- name: copy file with permission
+  hosts: all
+  become: true
+  tasks:
+  - name: coping files using playbook
+    copy:
+      src: /opt/appaccess.html
+      dest: /var/www/html
+      mode: 0777
+    when: ansible_nodename=="Ansible-RHEL-node"

@@ -1,0 +1,45 @@
+---
+- name: remove packages using when condition
+  hosts: all
+  become: true
+  tasks:
+  - name: stop httpd service
+    service:
+      name: httpd
+      state: stopped
+    when: ansible_nodename=="ip-172-31-39-197.eu-north-1.compute.internal"
+  - name: remove httpd package
+    yum:
+      name: httpd
+      state: absent
+    when: ansible_nodename=="ip-172-31-39-197.eu-north-1.compute.internal"
+  - name: remove tree package
+    yum:
+      name: tree
+      state: absent
+    when: ansible_nodename=="ip-172-31-37-168.eu-north-1.compute.internal"
+  - name: stop apache2 service on ubuntu
+    service:
+      name: apache2
+      state: stopped
+    when: ansible_nodename=="azure-ansible-node"
+  - name: remove apache2 package on ubuntu
+    apt:
+      name: apache2
+      state: absent
+    when: ansible_nodename=="azure-ansible-node"
+  - name: stop nginx service on RHEL server
+    service:
+      name: nginx
+      state: stopped
+    when: ansible_nodename=="Ansible-RHEL-node"
+  - name: remove nginx package on RHEL server
+    yum:
+      name: nginx
+      state: absent
+    when: ansible_nodename=="Ansible-RHEL-node"
+  - name: copy file with permission
+    copy:
+      src: /opt/appaccess.html
+      dest: /var/www/html
+      mode: 0777

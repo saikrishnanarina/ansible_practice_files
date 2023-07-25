@@ -1,0 +1,24 @@
+---
+- name: remove httpd package
+  hosts: aws
+  become: true
+  tasks:
+    - name: remove httpd package
+      service:
+        name: httpd
+        state: stopped
+    - name: uninstall httpd package
+      yum:
+        name: httpd
+        state: absent
+- hosts: azure
+  become: true
+  tasks:
+    - name: remove nginx package
+      service:
+        name: nginx
+        state: stopped
+    - name: uninstall nginx package
+      apt:
+        name: nginx
+        state: absent

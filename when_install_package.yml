@@ -1,0 +1,44 @@
+---
+- name: install some package using when condition
+  hosts: all
+  become: true
+  tasks:
+  # install httpd package on aws servers
+  - name: install httpd package
+    yum:
+      name: httpd
+      state: installed
+    when: ansible_nodename=="ip-172-31-39-197.eu-north-1.compute.internal" 
+  - name: start httpd service
+    service:
+      name: httpd
+      state: started
+    when: ansible_nodename=="ip-172-31-39-197.eu-north-1.compute.internal"
+    # install tree package on linux server
+  - name: install tree package
+    yum:
+      name: tree
+      state: installed
+    when: ansible_nodename=="ip-172-31-37-168.eu-north-1.compute.internal"
+     # install apache2 package on azure server
+  - name: install apache2 package on ubuntu
+    apt:
+      name: apache2
+      state: present
+    when: ansible_nodename=="azure-ansible-node"
+  - name: start apache2 service
+    service:
+      name: apache2
+      state: started
+    when: ansible_nodename=="azure-ansible-node"
+    # install nginx package on RHEL server
+  - name: install nginx on RHEL server
+    yum:
+      name: nginx
+      state: installed
+    when: ansible_nodename=="Ansible-RHEL-node"
+  - name: start nginx server
+    service:
+      name: nginx
+      state: started
+    when: ansible_nodename=="Ansible-RHEL-node"

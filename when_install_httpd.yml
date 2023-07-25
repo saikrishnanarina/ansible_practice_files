@@ -1,0 +1,11 @@
+---
+- name: when condition
+  hosts: aws
+  become: true
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_nodename=="ip-172-31-37-168.eu-north-1.compute.internal"
+          #      when: ansible_os_family=="RedHat"

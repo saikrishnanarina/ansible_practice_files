@@ -1,0 +1,9 @@
+---
+- name: remove multipack
+  hosts: all
+  become: true
+  tasks:
+    - name: remove multi packages
+      yum:
+        name: ["git", "tree"]
+        state: absent

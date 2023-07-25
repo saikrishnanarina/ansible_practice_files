@@ -1,0 +1,25 @@
+---
+- name: install and start service
+  hosts: aws
+  become: true
+  tasks:
+    - name: install httpd server
+      yum:
+        name: nginx
+        state: installed
+    - name: start service
+      service:
+        name: nginx
+        state: started
+- name: install and start service
+  hosts: azure
+  become: true
+  tasks:
+    - name: install httpd server
+      apt:
+        name: nginx
+        state: present
+    - name: start httpd server
+      service:
+        name: nginx
+        state: started

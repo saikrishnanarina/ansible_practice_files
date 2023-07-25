@@ -1,0 +1,24 @@
+---
+- name: create directory
+  hosts: all
+  become: true
+  tasks:
+  - name: create directory in ansible node1
+    file:
+      path: /opt/DevOps
+      state: directory
+    when: ansible_nodename=="ansible-node1"
+  - name: create file
+    file:
+      name: /opt/DevOps/file1
+      state: touch
+    when: ansible_nodename=="ansible-node1"
+  - name: writing content in some file
+    copy:
+      dest: /opt/DevOps/file1
+      content: |
+        This is Sai krishna
+        I am creating some file using playbook
+        I am working on Devops tools
+        I have knowledge all devops tools
+    when: ansible_nodename=="ansible-node1"    

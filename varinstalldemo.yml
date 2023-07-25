@@ -1,0 +1,10 @@
+---
+- name: install package using variable
+  hosts: all
+  become: true
+  vars:
+    install: tree
+  tasks:
+    - name: install package
+      yum:
+        name: "{{ install }}"

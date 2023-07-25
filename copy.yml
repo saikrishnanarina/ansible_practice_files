@@ -1,0 +1,10 @@
+---
+- name: copy files
+  hosts: all
+  become: true
+  tasks:
+    - name: coping files master to nodes
+      copy:
+        src: /opt/devEnv
+        dest: /opt
+        owner: narina

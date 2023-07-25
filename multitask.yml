@@ -1,0 +1,18 @@
+---
+- name: create some files
+  hosts: all
+  become: true
+  tasks:
+    - name: create directory
+      file:
+        path: /opt/DevEnv
+        state: directory
+    - name: create file
+      file:
+        path: /opt/DevEnv/index.html
+        state: touch
+    - name: coping files master to node
+      copy:
+        src: /opt/appaccess.html
+        dest: /opt/DevEnv
+        owner: narina

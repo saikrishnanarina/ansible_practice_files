@@ -1,0 +1,7 @@
+---
+- name: demo install
+  connection: localhost
+  become: true
+  tasks:
+    - name: execute playbook
+      shell: ansible-playbook -i hosts /home/narina/ansible/stop_remove.yml

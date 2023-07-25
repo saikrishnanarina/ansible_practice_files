@@ -1,0 +1,8 @@
+---
+- name: remove users using playbook
+  hosts: all
+  become: true
+  tasks:
+  - name: delete users
+    user: name=["devuser22", "produser22", "qauser22", "varfile_user"]
+      state: absent

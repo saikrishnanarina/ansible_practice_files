@@ -1,0 +1,26 @@
+---
+- name: remove files and packages using variable file
+  hosts: all
+  become: true
+  vars_files:
+    - useradd.yml
+    - gitpackage.yml
+    - createfile.yml
+    - createdir.yml
+  tasks:
+    - name: remove user
+      user:
+        name: "{{ user }}"
+        state: absent
+    - name: remove package
+      yum:
+        name: "{{ package }}"
+        state: absent
+    - name: remove file
+      file:
+        path: "{{ file }}"
+        state: absent
+    - name: remove directory
+      file:
+        path: "{{ dir }}"
+        state: absent

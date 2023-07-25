@@ -1,0 +1,9 @@
+---
+- name: install multi package
+  hosts: all
+  become: true
+  tasks:
+    - name: install multi package on RHEL server
+      yum:
+        name: ["git", "tree"]
+        state: installed
