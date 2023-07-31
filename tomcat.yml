@@ -1,0 +1,35 @@
+---
+- name: install tomcat
+  hosts: all
+  become: true
+  tasks:
+    - name: install java
+      yum:
+        name: java
+        state: installed
+      when: ansible_nodename=="ansible-node2"
+    - name: download package
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.91/bin/apache-tomcat-8.5.91.tar.gz
+        dest: /opt
+      when: ansible_nodename=="ansible-node2"
+    - name: extract tar file
+      unarchive:
+        src: /opt/apache-tomcat-8.5.91.tar.gz
+        dest: /opt
+        remote_src: yes
+      when: ansible_nodename=="ansible-node2"
+    - name: rename the file
+      shell: mv /opt//apache-tomcat-8.5.91 /opt/tomcat
+      when: ansible_nodename=="ansible-node2"
+    - name: assign permissions
+      file:
+        path: /opt/tomcat/bin/startup.sh
+        mode: 0777
+      when: ansible_nodename=="ansible-node2"
+    - name: start tomcat server
+      shell: nohup ./startup.sh
+        args:
+        chdir: /opt/tomcat/bin
+      when: ansible_nodename=="ansible-node2"
+

@@ -1,0 +1,6 @@
+---
+- name: install and start services
+  hosts: all
+  become: true
+  roles:
+    - ansible-roles

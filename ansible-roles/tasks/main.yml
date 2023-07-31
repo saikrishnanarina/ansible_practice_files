@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-roles
+ - name: install httpd package
+   yum:
+     name: httpd
+     state: installed
+   when: ansible_nodename=="ansible-node1"
+   notify: start httpd service
+ - name: install apache2 package
+   apt:
+     name: apache2
+     state: present
+   when: ansible_nodename=="ansible-ubuntu-node"
+   notify: start apache2 service
+ - name: copy html file
+   copy:
+     src: /opt/appaccess.html
+     dest: /opt
+     mode: 0777

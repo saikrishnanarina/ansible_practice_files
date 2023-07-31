@@ -1,0 +1,7 @@
+---
+- name: move file
+  hosts: all
+  become: true
+  tasks:
+    - name: rename the file
+      shell: mv /opt/mydirectory /opt/mydrive
